@@ -26,13 +26,10 @@ const babelConfig = preset => {
 module.exports = {
     context: path.resolve(__dirname, "src"),
     mode: "development",
-    entry: "./index.js",
+    entry: "./index.jsx",
     output: {
         filename: "[name].[hash].js",
         path: path.resolve(__dirname, "dist")
-    },
-    resolve: {
-        extensions: [".js", ".json"]
     },
     module: {
         rules: [
@@ -48,8 +45,16 @@ module.exports = {
                 test: /\.m?js$/,
                 exclude: /node_modules/,
                 use: babelConfig()
+            },
+            {
+                test: /\.jsx$/,
+                exclude: /node_modules/,
+                use: babelConfig("@babel/preset-react")
             }
         ]
+    },
+    resolve: {
+        extensions: [".js", ".json", ".jsx"]
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -58,9 +63,7 @@ module.exports = {
         })
     ],
     devServer: {
-        contentBase: __dirname + "/public/",
-        inline: true,
-        host: '0.0.0.0',
-        port: 8080
+        port: 8080,
+        hot: true
     }
 }
