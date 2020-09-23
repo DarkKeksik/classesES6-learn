@@ -2,6 +2,27 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+
+// DRY
+const cssLoaders = extra => {
+    const loaders = ["style-loader", "css-loader"];
+    if ( extra ) loaders.push( extra )
+    return loaders;
+}
+const babelConfig = preset => {
+    const configObj = {
+        loader: "babel-loader",
+        options: {
+            presets: ["@babel/preset-env"]
+        }
+    }
+
+    if ( preset ) configObj.options.presets.push( preset );
+    return configObj;
+}
+// DRY(end)
+
+
 module.exports = {
     context: path.resolve(__dirname, "src"),
     mode: "development",
@@ -17,21 +38,16 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: ["style-loader", "css-loader"]
+                use: cssLoaders()
             },
             {
                 test: /\.less$/,
-                use: ["style-loader", "css-loader", "less-loader"]
+                use: cssLoaders("less-loader")
             },
             {
                 test: /\.m?js$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ["@babel/preset-env"]
-                    }
-                }
+                use: babelConfig()
             }
         ]
     },
@@ -42,6 +58,9 @@ module.exports = {
         })
     ],
     devServer: {
-        port: 8000
+        contentBase: __dirname + "/public/",
+        inline: true,
+        host: '0.0.0.0',
+        port: 8080
     }
 }
