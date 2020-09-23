@@ -7,7 +7,7 @@ const App = () => {
     return (
         <section className="wrap">
             <h1>Learning classes in JavaScript</h1>
-            <div className="gridGap_1">
+            <div className="gridGap_1 gridColumns_2">
                 <ClassesES5 />
                 <ClassesES6 />
             </div>

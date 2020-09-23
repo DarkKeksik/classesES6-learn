@@ -56,6 +56,11 @@
   gap: 1.5rem;
 }
 
+.gridColumns_2 {
+  .grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .codePanel {
   background: #333333;
   border-radius: 5px;
@@ -63,4 +68,10 @@
   color: white;
   font-size: 14px;
   border-radius: 0 0 5px 5px;
+}
+
+@media screen and (max-width: 1024px) {
+  .gridColumns_2 {
+    grid-template-columns: 1fr;
+  }
 }

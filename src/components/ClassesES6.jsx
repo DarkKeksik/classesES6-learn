@@ -6,6 +6,7 @@ import 'prismjs/components/prism-javascript'
 
 const ClassesES6 = () => {
 
+    // Сюда код
     const [code, setCode] = useState(``);
 
     return (

@@ -8,6 +8,7 @@ import 'prismjs/components/prism-javascript';
 
 const ClassesES5 = () => {
 
+    // Сюда код
     const [code, setCode] = useState(`
 var Animal = function( options ) {
     this.name = options.name;
