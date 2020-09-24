@@ -6,8 +6,37 @@ import 'prismjs/components/prism-javascript'
 
 const ClassesES6 = () => {
 
+    const initStateCode = `
+class Animal {
+    static type = "ANIMAL";
+    
+    constructor(options) {
+        this.name = options.name;
+        this.age = options.age
+        this.hasTail = options.hasTail
+    }
+    
+    voice() {
+        console.log("I am this.name")
+    }
+}
+
+class Cat extends Animal {
+    constructor(options) {
+        super(options);
+        this.color = options.color;
+    }
+    
+    get ageInfo() {
+        return this.age * 7
+    }
+    set ageInfo(newAge) {
+        this.age = newAge
+    }
+} 
+    `;
     // Сюда код
-    const [code, setCode] = useState(``);
+    const [code, setCode] = useState(initStateCode.trim());
 
     return (
         <div className="block">
